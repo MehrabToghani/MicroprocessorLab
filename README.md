@@ -1,3 +1,5 @@
+[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](LICENSE)
+
 # Microprocessor Laboratory
 
 Exercises for the microprocessor lab course
