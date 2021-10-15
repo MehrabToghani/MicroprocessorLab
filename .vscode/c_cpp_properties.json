@@ -1,0 +1,26 @@
+{
+    "configurations": [
+        {
+            "name": "AVR",
+            "includePath": [
+                "C:/Program Files (x86)/AVR/avr/include/avr/**",
+                "C:/Program Files (x86)/AVR/avr/include/**",
+                "${workspaceFolder}/**"
+            ],
+            "defines": [
+                "__AVR_ATmega16__",
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "compilerPath": "C:/Program Files (x86)/AVR/bin/avr-gcc.exe",
+            "cStandard": "gnu11",
+            "cppStandard": "gnu++14",
+            "intelliSenseMode": "windows-gcc-x86",
+            "compilerArgs": [
+                "-mmcu=atmega16"
+            ]
+        }
+    ],
+    "version": 4
+}
