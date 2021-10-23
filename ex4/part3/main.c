@@ -62,6 +62,8 @@ void display()
     {
         if (times != 0)
         {
+            PORTB &= ~0x08; /* LED off */
+
             /* convert integer to string */
             char str[5];
             sprintf(str, "%.2d:%.2d", get_minute(), get_second());
@@ -71,13 +73,16 @@ void display()
         }
         else
         {
-            char str[] = "Alarm!";
-            LCD_Command(0x02); /* set curser at home */
+            char str[] = "Alarm!"; /* show message in LCD */
+            PORTB |= 0x08;         /* LED on */
+            LCD_Command(0x02);     /* set curser at home */
             LCD_String(str);
         }
     }
     else if (mode == set_timer)
     {
+        PORTB &= ~0x08; /* LED off */
+
         char str[5];
         sprintf(str, "%.2d:%.2d", set_minute_value, set_second_value);
 
