@@ -1,4 +1,4 @@
-# Watch
+# Alarm
 - ability to re-set alarm
 
 ## Sample
