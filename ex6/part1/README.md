@@ -1,4 +1,7 @@
-- ability to start and stop motor
+ability to change the temperature unit
+- Celsius
+- Kelvin
+- Fahrenheit
 
 ## Sample
 
