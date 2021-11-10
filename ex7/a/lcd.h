@@ -95,5 +95,4 @@ void Go_Line(char line)
         LCD_Command(0x80); /*go line 1 */
         break;
     }
-    LCD_Command(0x02); /* set curser at home */
 }

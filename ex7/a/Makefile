@@ -19,7 +19,7 @@ TARGET      	= main
 LIBDIR        = lib
 #
 # Type of microcontroller
-DEVICE        = atmega16
+DEVICE        = atmega32
 #
 # Optimization
 OPTIMIZE      = Os
