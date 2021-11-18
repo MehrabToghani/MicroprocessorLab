@@ -19,9 +19,10 @@ int ticks = 0;
 /************************************ main ************************************/
 int main()
 {
-    DDRC = DDRC | 0x0F; /* set four bit of pin A to ouput(PORT) */
+    DDRC = DDRC | 0x0F; /* set four bit of pin C to ouput(PORT) */
+    DDRB = 0xFF;        /* set pin B to ouput(PORT) */
 
-    TIMSK = BV(TOIE0); /* unmask overflow interrupt for timer_0 */
+    TIMSK = BV(TOIE0);           /* unmask overflow interrupt for timer_0 */
     TCCR0 = BV(CS00) | BV(CS02); /* set timer_0 frequency to clock/1024 */
 
     ADCSRA = BV(ADEN) | BV(ADPS2) | BV(ADPS1) | BV(ADPS0); /* enable ADC, prescale 128 => clock/128 */
@@ -63,6 +64,8 @@ ISR(TIMER0_OVF_vect)
         turn = (turn + 1) % 4;
         ticks--;
     }
+    
+    PORTB = 0x40;
     UDR = temp;
 }
 

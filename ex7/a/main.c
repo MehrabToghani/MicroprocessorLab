@@ -19,6 +19,7 @@ void add_user();
 void delete_user();
 void edit_date();
 void edit_clock();
+void rotate_motor();
 char str_equals(char *str1, char *str2);
 void str_copy(char *destination, char *target, int first, int size);
 void set_date(char *str);
@@ -273,7 +274,9 @@ void display_lcd()
         Go_Line(1);
         LCD_String("----Rotate motor---");
         Go_Line(2);
-        LCD_String("Steps:             ");
+        LCD_String("Steps (0-255):     ");
+        Go_Line(3);
+        LCD_String(current_value);
     }
     else if (page == USER_OPTIONS_PAGE)
     {
@@ -527,6 +530,11 @@ void take_action(unsigned char key)
             str_copy(current_username, empty_str, 0, 20);
         }
     }
+    else if (page == ROTATE_MOTOR)
+    {
+        if (key == '#')
+            rotate_motor();
+    }
 }
 
 /******************************************************************************/
@@ -647,6 +655,18 @@ void edit_clock()
     sscanf(current_value, "%2d:%2d:%2d", &hour, &minute, &second);
     time = ((long long)hour * hour_time) + (minute * minute_time) + second + ((time / day_time) * day_time);
     str_copy(message, "Clock changed!     ", 0, 20);
+    success = 1;
+    change_page(MESSAGE);
+}
+
+/******************************************************************************/
+void rotate_motor()
+{
+    int steps;
+    sscanf(current_value, "%3d", &steps);
+    UDR = (unsigned char)steps;
+    
+    str_copy(message, "Rotate motor       ", 0, 20);
     success = 1;
     change_page(MESSAGE);
 }
