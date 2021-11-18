@@ -60,7 +60,7 @@ long long time = 0;
 char page = OFF;
 char previus_page = OFF;
 struct User admin = {.username = "1", .password = "1234"};
-struct User users[10];
+struct User users[5];
 char username[20] = "";
 char password[20] = "";
 char current_value[20] = "";
@@ -74,12 +74,17 @@ const int hour_time = 60 * 60;
 const long day_time = (long)(60 * 60) * 24;
 const long month_time = ((long)(60 * 60) * 24) * 30;
 const long year_time = ((long)(60 * 60) * 24) * 30 * 12;
+int temp = 0;
 
 /************************************ main ************************************/
 int main()
 {
     TIMSK = BV(TOIE0);           /* unmask overflow interrupt for timer_0 */
     TCCR0 = BV(CS00) | BV(CS02); /* set timer_0 frequency to clock/1024 */
+
+    UCSRB = BV(RXEN) | BV(TXEN); /* Enable RX and TX */
+    UCSRB |= BV(RXCIE);          /* Enable RX interrupt */
+    UBRRL = 25;                  /* 2400 bit rate */
 
     sei(); /* enable global interrupt */
 
@@ -105,6 +110,8 @@ int main()
         time_snapshot = time;
         take_action(key);
     }
+
+    return 0;
 }
 
 /************************ timer_0 overflow interrupt **************************/
@@ -116,6 +123,12 @@ ISR(TIMER0_OVF_vect)
         time++;
         overflow_count = 0;
     }
+}
+
+/******************************* RX interrupt *********************************/
+ISR(USART_RXC_vect)
+{
+    temp = UDR;
 }
 
 /********************************* functions **********************************/
@@ -202,6 +215,9 @@ void display_lcd()
         Go_Line(3);
         set_clock(current_value);
         LCD_String(current_value);
+        Go_Line(4);
+        sprintf(current_value, "Temp: %4d C        ", temp);
+        LCD_String(current_value);
     }
     else if (page == ADMIN_SET_USER_USERNAME)
     {
@@ -279,6 +295,9 @@ void display_lcd()
         LCD_String(current_value);
         Go_Line(3);
         set_clock(current_value);
+        LCD_String(current_value);
+        Go_Line(4);
+        sprintf(current_value, "Temp: %4d C        ", temp);
         LCD_String(current_value);
     }
 }
