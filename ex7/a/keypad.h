@@ -52,7 +52,7 @@ unsigned char table[13] = {
     '1', '2', '3',
     '4', '5', '6',
     '7', '8', '9',
-    'b', '0', 'e'};
+    '*', '0', '#'};
 
 unsigned char ports[] = {A, B, C, D};
 
@@ -112,6 +112,7 @@ unsigned char key_scan(void)
             else if ((KEY_PIN & bv(R3)) == 0)
                 key = table[i * 3 + 2];
         }
+
         return key;
     }
     else
