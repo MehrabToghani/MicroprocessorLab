@@ -232,7 +232,7 @@ void display_lcd()
     else if (page == ADMIN_SET_USER_PASSWORD)
     {
         Go_Line(1);
-        LCD_String("--Set (Edit) user--");
+        LCD_String("--Add (Edit) user--");
         Go_Line(2);
         LCD_String("Password:          ");
         Go_Line(3);
@@ -563,7 +563,7 @@ void login()
             success = 1;
         }
 
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 5; i++)
         {
             if (str_equals(users[i].username, username) && str_equals(users[i].password, password))
             {
@@ -587,7 +587,7 @@ void login()
 void add_user()
 {
     change_page(MESSAGE);
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 5; i++)
     {
         if (str_equals(empty_str, users[i].username))
         {
@@ -618,7 +618,7 @@ void add_user()
 void delete_user()
 {
     change_page(MESSAGE);
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 5; i++)
     {
         if (str_equals(username, users[i].username))
         {
